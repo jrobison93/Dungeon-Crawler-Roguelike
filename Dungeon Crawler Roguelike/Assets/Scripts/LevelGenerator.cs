@@ -28,11 +28,13 @@ public class LevelGenerator : MonoBehaviour
     public GameObject botLeftCorner;
     public GameObject topRightCorner;
     public GameObject topLeftCorner;
+    public GameObject background;
     public GameObject exit;
 
     private int[,] map;
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
+    private System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
 
     public void CreateLevel(int width, int height, int fillPercent)
     {
@@ -77,7 +79,6 @@ public class LevelGenerator : MonoBehaviour
         //Debug.Log((map.GetLength(0) / 5).ToString() + " " + (map.GetLength(1) / 5).ToString());
         int[,] tempMap = new int[map.GetLength(0) - 2 / 5, map.GetLength(1) - 2 / 5];
 
-        System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
         for (int i = 0; i < tempMap.GetLength(0); i++)
         {
             for(int j = 0; j < tempMap.GetLength(1); j++)
@@ -151,16 +152,34 @@ public class LevelGenerator : MonoBehaviour
     private void PlaceTiles()
     {
         levelHolder = new GameObject("Level").transform;
-        for (int i = 0; i < map.GetLength(0); i++)
+        for (int i = -5; i < map.GetLength(0) + 5; i++)
         {
-            for(int j = 0; j < map.GetLength(1); j++)
+            for(int j = -5; j < map.GetLength(1) + 5; j++)
             {
                 GameObject toInstantiate = new GameObject();
-                if(map[i, j] == 0)
+                if(i < 0 || i >= map.GetLength(0) || j < 0 || j >= map.GetLength(1))
                 {
-                    toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
-                    instance.transform.SetParent(levelHolder);
+                    toInstantiate = background;
+                }
+                else if(map[i, j] == 0)
+                {
+                    int randVal = rand.Next(0, 100);
+                    if(randVal < 50)
+                    {
+                        toInstantiate = floorTiles[0];
+                    }
+                    else if(randVal < 90)
+                    {
+                        toInstantiate = floorTiles[1];
+                    }
+                    else if(randVal < 95)
+                    {
+                        toInstantiate = floorTiles[2];
+                    }
+                    else
+                    {
+                        toInstantiate = floorTiles[3];
+                    }
                 }
                 else if(map[i, j] == 1)
                 {
@@ -187,11 +206,12 @@ public class LevelGenerator : MonoBehaviour
                             toInstantiate = botLeftCorner;
                             break;
                         default:
+                            toInstantiate = background;
                             break;
                     }
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
-                    instance.transform.SetParent(levelHolder);
                 }
+                GameObject instance = Instantiate(toInstantiate, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
+                instance.transform.SetParent(levelHolder);
             }
         }
 
@@ -205,29 +225,31 @@ public class LevelGenerator : MonoBehaviour
             return 0;
         }
         // Top Right Corner
-        if ((i == map.GetLength(0) - 1 && j == map.GetLength(1) - 1) || (i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1) 
-            && (map[i - 1, j] == 1 && map[i, j - 1] == 1 
-            && ((map[i - 1, j - 1] == 0) || (map[i + 1, j] == 0 && map[i, j + 1] == 0))))
+        if ((i == map.GetLength(0) - 1 && j == map.GetLength(1) - 1) 
+            || (i > 0 && j > 0) && (map[i - 1, j] == 1 && map[i, j - 1] == 1 
+            && ((map[i - 1, j - 1] == 0) || (i < map.GetLength(0) - 1 && map[i + 1, j] == 0 && map[i, j + 1] == 0))))
         {
             return 3;
         }
         // Top Left Corner
-        if ((i == 0 && (j == map.GetLength(1) - 1) || (i < map.GetLength(0) - 1 && j > 0 && map[i + 1, j] == 1 && map[i, j - 1] == 1 && (map[i + 1, j - 1] == 0))) 
-            || (i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1) 
+        if ((i == 0 && (j == map.GetLength(1) - 1) 
+            || (i < map.GetLength(0) - 1 && j > 0 && map[i + 1, j] == 1 && map[i, j - 1] == 1 && (map[i + 1, j - 1] == 0))) 
+            || (i > 1 && j > 0 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1) 
             && (map[i + 1, j] == 1 && map[i, j - 1] == 1 
             && ((map[i + 1, j - 1] == 0) || (map[i - 1, j] == 0 && map[i, j + 1] == 0 ))))
         {
             return 4;
         }
         // Bottom Right Corner
-        if ((i == map.GetLength(0) - 1 && j == 0) || (i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1)
-            && (map[i - 1, j] == 1 && map[i, j + 1] == 1 
-            && ((map[i - 1, j + 1] == 0) || (map[i + 1, j] == 0 && map[i, j - 1] == 0))))
+        if ((i == map.GetLength(0) - 1 && j == 0) 
+            || i > 0 && j < map.GetLength(1) - 1 && (map[i - 1, j] == 1 && map[i, j + 1] == 1 
+            && (( map[i - 1, j + 1] == 0) 
+            || (i < map.GetLength(0) - 1 && j > 0 && map[i + 1, j] == 0 && map[i, j - 1] == 0))))
         {
             return 5;
         }
         // Bottom Left Corner
-        if ((i == 0 && j == 0) || (i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1)
+        if ((i == 0 && j == 0) || (i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1)
             && (map[i + 1, j] == 1 && map[i, j + 1] == 1 
             && ((map[i + 1, j + 1] == 0) || (map[i - 1, j] == 0 && map[i, j - 1] == 0))))
         {
@@ -241,7 +263,8 @@ public class LevelGenerator : MonoBehaviour
             return 1;
         }
         // Vertical Wall
-        if ((i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1)
+        if (((i == 0 || i == map.GetLength(0) - 1) && j > 0 && j < map.GetLength(1) - 1)
+            || (i > 1 && j > 1 && i < map.GetLength(0) - 1 && j < map.GetLength(1) - 1)
             && map[i, j + 1] == 1 && map[i, j - 1] == 1 && (i == 0 || i == map.GetLength(1) - 1 || map[i - 1, j] == 0 || map[i + 1, j] == 0))
         {
             return 2;
