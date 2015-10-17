@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &158330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 404346}
+  - 114: {fileID: 11422468}
+  m_Layer: 0
+  m_Name: MossyLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404346
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11422468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9717353bdf8023042909fa7ffa3975c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 50
+  height: 50
+  minRooms: 0
+  maxRooms: 0
+  minRoomSize: 0
+  maxRoomSize: 0
+  level: 0
+  fillPercent: 60
+  floorTiles:
+  - {fileID: 127548, guid: fd23fab2baa9ff84187ff051ba655906, type: 2}
+  - {fileID: 136256, guid: 7b5b8c5cd88210a488db92bad6057cff, type: 2}
+  - {fileID: 122942, guid: 00e64b935815a104981fe0caa6a6b6b9, type: 2}
+  - {fileID: 116038, guid: a138f542c6385254e8dc099bf91bc68f, type: 2}
+  botMidWallTiles:
+  - {fileID: 122180, guid: 97e5edc7c74e98e4ca3d938989da2cad, type: 2}
+  - {fileID: 118794, guid: 8dc3946a75b5ea544afa9f5d38929dde, type: 2}
+  vertWallTiles:
+  - {fileID: 182616, guid: 0d42fca74796f8e45a9719994ba335ce, type: 2}
+  - {fileID: 122004, guid: e12c894f57423af4886d5016109f8252, type: 2}
+  obstacles:
+  - {fileID: 163272, guid: 40b20955cefcdba4f882a53ee6abcb95, type: 2}
+  - {fileID: 161454, guid: 2fb6a6a5e2f6b084c9ea228057c1d996, type: 2}
+  - {fileID: 153270, guid: f31f5f8dc02e8eb48b4ba649605125a4, type: 2}
+  botRightCorner: {fileID: 186264, guid: 6ac9153f1d361b44e8fe859813f3025a, type: 2}
+  botLeftCorner: {fileID: 108454, guid: faee10808596157478ddd462ffbe792d, type: 2}
+  topRightCorner: {fileID: 104626, guid: 6c1f32f36e459bc41b910ceef06d5bd3, type: 2}
+  topLeftCorner: {fileID: 195522, guid: 764ce7cdd042a314e8a2fe477066dd0e, type: 2}
+  exit: {fileID: 195978, guid: 6bc8be0d30519f24aab661b5011cfe12, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: botRightCorner
+      value: 
+      objectReference: {fileID: 186264, guid: 6ac9153f1d361b44e8fe859813f3025a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: botLeftCorner
+      value: 
+      objectReference: {fileID: 108454, guid: faee10808596157478ddd462ffbe792d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: topRightCorner
+      value: 
+      objectReference: {fileID: 104626, guid: 6c1f32f36e459bc41b910ceef06d5bd3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: topLeftCorner
+      value: 
+      objectReference: {fileID: 195522, guid: 764ce7cdd042a314e8a2fe477066dd0e, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 158330}
+  m_IsPrefabParent: 1
