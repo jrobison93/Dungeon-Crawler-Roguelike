@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6102166}
   m_Layer: 0
   m_Name: HealthLarge
-  m_TagString: Potion
+  m_TagString: HealthLarge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Potion
+      value: HealthLarge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

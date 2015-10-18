@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
     public float moveTime = 0.25f;
     public LayerMask blockingLayer;
-    public int level;
-    public int health;
-    public int baseAttack;
+    public int level = 1;
+    public int baseHealth = 100;
+    public int baseAttack = 10;
+
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
+    private int totalHealth;
+    private int currentHealth;
 
     // Use this for initialization
     protected virtual void Start()
@@ -19,6 +23,9 @@ public abstract class MovingObject : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
+
+        totalHealth = baseHealth;
+        currentHealth = totalHealth;
     }
 
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -66,9 +73,27 @@ public abstract class MovingObject : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
-        health -= damage;
+        currentHealth -= damage;
+        Debug.Log("Taking damage: " + damage + " " + currentHealth);
+        if(currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void AddHealth(int amount)
+    {
+        if (currentHealth + amount < totalHealth)
+        {
+            currentHealth += amount;
+        }
+        else
+        {
+            currentHealth = totalHealth;
+        }
+
     }
 
     protected abstract void OnCantMove<T>(T component)
