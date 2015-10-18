@@ -58,6 +58,18 @@ MonoBehaviour:
   - {fileID: 163272, guid: 40b20955cefcdba4f882a53ee6abcb95, type: 2}
   - {fileID: 161454, guid: 2fb6a6a5e2f6b084c9ea228057c1d996, type: 2}
   - {fileID: 153270, guid: f31f5f8dc02e8eb48b4ba649605125a4, type: 2}
+  potions:
+  - {fileID: 175748, guid: 6bccf87744faa8347ae9439abc6bfe3e, type: 2}
+  - {fileID: 150354, guid: 28863de35665da74f9fb464192d701df, type: 2}
+  - {fileID: 128784, guid: 2bf18e367a9a8da4da0666e540dd8b19, type: 2}
+  - {fileID: 167032, guid: 6793eea525510724d89769c6e797126e, type: 2}
+  - {fileID: 160534, guid: 1d242017bbbcd6b4b89340067ebdff50, type: 2}
+  - {fileID: 191458, guid: d216db096073a6d4fae29ce6f1263225, type: 2}
+  powerUps:
+  - {fileID: 147234, guid: 9a22f38e83e52f444977ef68327e5e18, type: 2}
+  - {fileID: 185990, guid: c4cd8d563c7f7fe448ce8d81fe6f818d, type: 2}
+  - {fileID: 183420, guid: 5fb40757b8d1a7e4cb12b41852fcf380, type: 2}
+  - {fileID: 161180, guid: 7186d7472dfe3d7419f2d2eebe955c0f, type: 2}
   botRightCorner: {fileID: 186264, guid: 6ac9153f1d361b44e8fe859813f3025a, type: 2}
   botLeftCorner: {fileID: 108454, guid: faee10808596157478ddd462ffbe792d, type: 2}
   topRightCorner: {fileID: 104626, guid: 6c1f32f36e459bc41b910ceef06d5bd3, type: 2}
@@ -84,6 +96,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemies.Array.size
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: potions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: botRightCorner

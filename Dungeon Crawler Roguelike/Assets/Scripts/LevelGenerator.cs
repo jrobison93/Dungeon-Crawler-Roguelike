@@ -17,6 +17,8 @@ public class LevelGenerator : MonoBehaviour
     public GameObject[] botMidWallTiles;
     public GameObject[] vertWallTiles;
     public GameObject[] obstacles;
+    public GameObject[] potions;
+    public GameObject[] powerUps;
     public GameObject botRightCorner;
     public GameObject botLeftCorner;
     public GameObject topRightCorner;
@@ -31,6 +33,7 @@ public class LevelGenerator : MonoBehaviour
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<Room> rooms;
     private System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
+    private Coord playerLoc;
 
     public void CreateLevel(int width, int height, int fillPercent, GameObject player)
     {
@@ -43,6 +46,8 @@ public class LevelGenerator : MonoBehaviour
         InitializeList();
         CreateFloor();
         AddPlayerAndCreatures();
+        AddItems();
+        AddExit();
 	
 	}
 
@@ -537,16 +542,14 @@ public class LevelGenerator : MonoBehaviour
     private void AddPlayerAndCreatures()
     {
         Room mainRoom = rooms[rooms.Count - 1];
-        Coord playerLoc = mainRoom.tiles[rand.Next(0, mainRoom.tiles.Count)];
+        playerLoc = mainRoom.tiles[rand.Next(0, mainRoom.tiles.Count)];
         map[playerLoc.tileX, playerLoc.tileY] = 2;
         GameObject instance = Instantiate(player, new Vector3(playerLoc.tileX, playerLoc.tileY, 0f), Quaternion.identity) as GameObject;
         instance.transform.SetParent(levelHolder);
 
-        Debug.Log(playerLoc.tileX + " " + playerLoc.tileY);
-
         for(int i = 0; i < rooms.Count - 1; i++)
         {
-            for(int j = 0; j < (rooms[i].roomSize / rand.Next(8, 15)); j++ )
+            for(int j = 0; j < (rooms[i].roomSize / rand.Next(15, 25)); j++ )
             {
                 Coord tilePlacement = rooms[i].tiles[rand.Next(0, rooms[i].tiles.Count)];
                 if (map[tilePlacement.tileX, tilePlacement.tileY] > 1 || playerLoc.Distance(tilePlacement) < 10)
@@ -554,6 +557,51 @@ public class LevelGenerator : MonoBehaviour
                 instance = Instantiate(enemies[rand.Next(0, enemies.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
                 instance.transform.SetParent(levelHolder);
                 map[tilePlacement.tileX, tilePlacement.tileY] = 3;
+            }
+
+        }
+    }
+
+    private void AddExit()
+    {
+        while(true)
+        {
+            Room room = rooms[rand.Next(0, rooms.Count - 1)];
+            Coord tilePlacement = room.tiles[rand.Next(0, room.tiles.Count)];
+            if (map[tilePlacement.tileX, tilePlacement.tileY] > 1 || tilePlacement.Distance(playerLoc) < 25)
+                continue;
+            GameObject instance = Instantiate(exit, new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+            instance.transform.SetParent(levelHolder);
+            break;
+        }
+    }
+
+    private void AddItems()
+    {
+        for (int i = 0; i < rooms.Count - 1; i++)
+        {
+            for (int j = 0; j < (rooms[i].roomSize / rand.Next(30, 35)); j++)
+            {
+                Coord tilePlacement = rooms[i].tiles[rand.Next(0, rooms[i].tiles.Count)];
+                if (map[tilePlacement.tileX, tilePlacement.tileY] > 1)
+                    continue;
+                GameObject instance = Instantiate(potions[rand.Next(0, potions.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+                instance.transform.SetParent(levelHolder);
+                map[tilePlacement.tileX, tilePlacement.tileY] = 4;
+            }
+
+        }
+
+        for (int i = 0; i < rooms.Count - 1; i++)
+        {
+            for (int j = 0; j < (rooms[i].roomSize / rand.Next(40, 45)); j++)
+            {
+                Coord tilePlacement = rooms[i].tiles[rand.Next(0, rooms[i].tiles.Count)];
+                if (map[tilePlacement.tileX, tilePlacement.tileY] > 1)
+                    continue;
+                GameObject instance = Instantiate(powerUps[rand.Next(0, powerUps.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+                instance.transform.SetParent(levelHolder);
+                map[tilePlacement.tileX, tilePlacement.tileY] = 4;
             }
 
         }

@@ -6,6 +6,16 @@ TagManager:
   tags:
   - Enemy
   - Exit
+  - HealthLarge
+  - HealthMedium
+  - HealthSmall
+  - ManaLarge
+  - ManaMedium
+  - ManaSmall
+  - AttackUp
+  - ManaUp
+  - DefenseUp
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
