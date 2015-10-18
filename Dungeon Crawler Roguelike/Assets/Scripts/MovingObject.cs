@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveTime = 0.1f;
+    public float moveTime = 0.25f;
     public LayerMask blockingLayer;
     public int level;
     public int health;

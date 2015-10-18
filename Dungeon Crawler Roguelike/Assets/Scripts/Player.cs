@@ -4,14 +4,30 @@ using System;
 
 public class Player : MovingObject
 {
-
-    // Use this for initialization
-    void Start () {
-	
-	}
+    private float walkTime = 0.25f;
+    private float startTime = Time.time;
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        if (startTime + walkTime <= Time.time)
+        {
+            int horizontal = (int)Input.GetAxisRaw("Horizontal");
+            int vertical = (int)Input.GetAxisRaw("Vertical");
+
+            if (horizontal != 0)
+            {
+                vertical = 0;
+            }
+
+            if (horizontal != 0 || vertical != 0)
+            {
+                Debug.Log(horizontal + " " + vertical);
+                AttemptMove<Enemy>(horizontal, vertical);
+            }
+
+            startTime = Time.time;
+        }
 	
 	}
 
