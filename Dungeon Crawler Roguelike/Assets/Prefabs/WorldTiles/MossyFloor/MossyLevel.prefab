@@ -41,10 +41,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 50
   height: 50
-  minRooms: 0
-  maxRooms: 0
-  minRoomSize: 0
-  maxRoomSize: 0
   level: 0
   fillPercent: 60
   floorTiles:
@@ -68,6 +64,16 @@ MonoBehaviour:
   topLeftCorner: {fileID: 195522, guid: 764ce7cdd042a314e8a2fe477066dd0e, type: 2}
   background: {fileID: 101784, guid: 902e9e71f18e5b54cbda4ab47b35cede, type: 2}
   exit: {fileID: 195978, guid: 6bc8be0d30519f24aab661b5011cfe12, type: 2}
+  enemies:
+  - {fileID: 140704, guid: 47630640707b5a44a97b2550a118a940, type: 2}
+  - {fileID: 171676, guid: 3f17f1e1c1f33734dac6f1acb850e5af, type: 2}
+  - {fileID: 183736, guid: 8ffe1043a34f9b34586ecc7602bce205, type: 2}
+  - {fileID: 196080, guid: de820493ae49a744a9a9642f329ac376, type: 2}
+  - {fileID: 128602, guid: 12b497c4d219c6149a630ee84fa2c42d, type: 2}
+  - {fileID: 146896, guid: fca789855c9195547b1d2931c383d95f, type: 2}
+  - {fileID: 102490, guid: 24e85957a222bad4f855698048587cca, type: 2}
+  - {fileID: 198906, guid: f22d07970700a234e8702045efc97c24, type: 2}
+  - {fileID: 159774, guid: 41549e8e1896ad74786af037564efd60, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -75,6 +81,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: enemies.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: botRightCorner
       value: 
