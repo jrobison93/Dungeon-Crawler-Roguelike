@@ -9,14 +9,6 @@ public class LevelGenerator : MonoBehaviour
     [HideInInspector]
     public int height;
     [HideInInspector]
-    public int minRooms;
-    [HideInInspector]
-    public int maxRooms;
-    [HideInInspector]
-    public int minRoomSize;
-    [HideInInspector]
-    public int maxRoomSize;
-    [HideInInspector]
     public int level;
     [HideInInspector]
     public int fillPercent;
@@ -31,23 +23,26 @@ public class LevelGenerator : MonoBehaviour
     public GameObject topLeftCorner;
     public GameObject background;
     public GameObject exit;
+    public GameObject[] enemies;
 
     private int[,] map;
+    private GameObject player;
     private Transform levelHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<Room> rooms;
     private System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
 
-    public void CreateLevel(int width, int height, int fillPercent)
+    public void CreateLevel(int width, int height, int fillPercent, GameObject player)
     {
         this.width = width;
         this.height = height;
         this.fillPercent = fillPercent;
+        this.player = player;
         map = new int[width + 2, height + 2];
 
         InitializeList();
         CreateFloor();
-        PlaceTiles();
+        AddPlayerAndCreatures();
 	
 	}
 
@@ -85,6 +80,7 @@ public class LevelGenerator : MonoBehaviour
         {
             SmoothFloor();
         }
+        PlaceFloorTiles();
     }
 
     private void RandomlyGenerateFloor()
@@ -411,7 +407,7 @@ public class LevelGenerator : MonoBehaviour
         return wallCount;
     }
 
-    private void PlaceTiles()
+    private void PlaceFloorTiles()
     {
         levelHolder = new GameObject("Level").transform;
         for (int i = -5; i < map.GetLength(0) + 5; i++)
@@ -536,5 +532,30 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void AddPlayerAndCreatures()
+    {
+        Room mainRoom = rooms[0];
+        Coord playerLoc = mainRoom.tiles[rand.Next(0, mainRoom.tiles.Count)];
+        map[playerLoc.tileX, playerLoc.tileY] = 2;
+        GameObject instance = Instantiate(player, new Vector3(playerLoc.tileX, playerLoc.tileY, 0f), Quaternion.identity) as GameObject;
+        instance.transform.SetParent(levelHolder);
+
+        Debug.Log(playerLoc.tileX + " " + playerLoc.tileY);
+
+        for(int i = 1; i < rooms.Count; i++)
+        {
+            for(int j = 0; j < (rooms[j].roomSize / rand.Next(2, 5)); j++ )
+            {
+                Coord tilePlacement = rooms[j].tiles[rand.Next(0, rooms[j].tiles.Count)];
+                if (map[tilePlacement.tileX, tilePlacement.tileY] > 1)
+                    continue;
+                instance = Instantiate(enemies[rand.Next(0, enemies.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+                instance.transform.SetParent(levelHolder);
+                map[tilePlacement.tileX, tilePlacement.tileY] = 3;
+            }
+
+        }
     }
 }
