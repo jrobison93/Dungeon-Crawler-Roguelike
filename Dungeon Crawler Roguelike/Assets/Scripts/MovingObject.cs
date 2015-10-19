@@ -4,7 +4,7 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveTime = 0.25f;
+    public float moveTime = 0.1f;
     public LayerMask blockingLayer;
     public int level = 1;
     public int baseHealth = 100;
@@ -14,8 +14,10 @@ public abstract class MovingObject : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
-    private int totalHealth;
-    private int currentHealth;
+    
+
+    protected float totalHealth;
+    protected float currentHealth;
 
     // Use this for initialization
     protected virtual void Start()
@@ -76,24 +78,10 @@ public abstract class MovingObject : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Taking damage: " + damage + " " + currentHealth);
         if(currentHealth <= 0)
         {
             gameObject.SetActive(false);
         }
-    }
-
-    public void AddHealth(int amount)
-    {
-        if (currentHealth + amount < totalHealth)
-        {
-            currentHealth += amount;
-        }
-        else
-        {
-            currentHealth = totalHealth;
-        }
-
     }
 
     protected abstract void OnCantMove<T>(T component)

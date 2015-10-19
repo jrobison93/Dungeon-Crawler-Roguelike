@@ -1,20 +1,39 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 using System;
 
 public class Player : MovingObject
 {
     public int baseMana;
+    public Slider healthSlider;
+    public Slider manaSlider;
 
     private float walkTime = 0.25f;
     private float startTime = Time.time;
-    private int totalMana;
-    private int currentMana;
-	
-	// Update is called once per frame
-	void Update ()
+    private float totalMana;
+    private float currentMana;
+    private float attackMod = 1f;
+    private float manaMod = 1f;
+    private float speedMod = 1f;
+    private float defenseMod = 1f;
+
+    protected override void Start()
     {
-        if (startTime + walkTime <= Time.time)
+        base.Start();
+        GameObject health = GameObject.FindGameObjectWithTag("HealthSlider");
+        healthSlider = health.GetComponent<Slider>();
+
+        GameObject mana = GameObject.FindGameObjectWithTag("ManaSlider");
+        manaSlider = mana.GetComponent<Slider>();
+
+        totalMana = baseMana;
+        currentMana = totalMana;
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (startTime + walkTime - Mathf.Log(speedMod) <= Time.time)
         {
             int horizontal = (int)Input.GetAxisRaw("Horizontal");
             int vertical = (int)Input.GetAxisRaw("Vertical");
@@ -73,27 +92,52 @@ public class Player : MovingObject
         }
         else if (other.tag == "AttackUp")
         {
+            attackMod++;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "ManaUp")
         {
+            manaMod++;
+            ApplyManaMod();
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "DefenseUp")
         {
+            defenseMod++;
+            ApplyDefenseMod();
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "SpeedUp")
         {
+            speedMod += 0.01f;
             other.gameObject.SetActive(false);
         }
 
 
     }
 
+    private void ApplyManaMod()
+    {
+        int manaIncrease = (int)Math.Ceiling(Math.Log(manaMod, 2));
+        totalMana += manaIncrease;
+        currentMana += manaIncrease;
+
+        manaSlider.value = (currentMana / totalMana);
+    }
+
+    private void ApplyDefenseMod()
+    {
+        int defenseIncrease = (int)Math.Ceiling(Math.Log(defenseMod, 2));
+        totalHealth += defenseIncrease;
+        currentHealth += defenseIncrease;
+
+        healthSlider.value = (currentHealth / totalHealth);
+    }
+
     private void UseMana(int cost)
     {
         currentMana -= cost;
+        manaSlider.value = (currentMana / totalMana);
     }
 
     private void AddMana(int amount)
@@ -107,6 +151,28 @@ public class Player : MovingObject
             currentMana = totalMana;
         }
 
+        manaSlider.value = (currentMana / totalMana);
+
+    }
+
+    public void AddHealth(int amount)
+    {
+        if (currentHealth + amount < totalHealth)
+        {
+            currentHealth += amount;
+        }
+        else
+        {
+            currentHealth = totalHealth;
+        }
+
+        healthSlider.value = (currentHealth / totalHealth);
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        healthSlider.value = (currentHealth / totalHealth);
     }
 
     protected override void OnCantMove<T>(T component)

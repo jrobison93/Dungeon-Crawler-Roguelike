@@ -44,7 +44,7 @@ MonoBehaviour:
   playerClasses:
   - {fileID: 192020, guid: 034c4e00d2940814b92f9ada144ab0a3, type: 2}
   - {fileID: 104792, guid: 715dadf4a5172124889668e35881ce97, type: 2}
-  - {fileID: 131564, guid: c31d1ab6238e0d647ba8a163a87834da, type: 2}
+  - {fileID: 104824, guid: 2511a588185d9b04388236c596c8c975, type: 2}
   - {fileID: 147838, guid: a79ffe883f0bdc947ae4ee3c719da7f3, type: 2}
   - {fileID: 168896, guid: 1a9fc18d0b2b9c741bbe6b508b4237e7, type: 2}
 --- !u!1001 &100100000
@@ -101,7 +101,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playerClasses.Array.data[2]
       value: 
-      objectReference: {fileID: 131564, guid: c31d1ab6238e0d647ba8a163a87834da, type: 2}
+      objectReference: {fileID: 104824, guid: 2511a588185d9b04388236c596c8c975, type: 2}
     - target: {fileID: 0}
       propertyPath: playerClasses.Array.data[1]
       value: 

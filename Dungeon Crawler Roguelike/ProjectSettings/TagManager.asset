@@ -16,6 +16,8 @@ TagManager:
   - ManaUp
   - DefenseUp
   - SpeedUp
+  - HealthSlider
+  - ManaSlider
   layers:
   - Default
   - TransparentFX
