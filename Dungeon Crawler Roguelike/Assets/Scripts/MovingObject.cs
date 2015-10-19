@@ -4,11 +4,11 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveTime = 0.1f;
+    public float moveTime = 0.05f;
     public LayerMask blockingLayer;
     public int level = 1;
     public int baseHealth = 100;
-    public int baseAttack = 10;
+    public float baseAttack = 10;
 
 
     private BoxCollider2D boxCollider;
@@ -75,13 +75,9 @@ public abstract class MovingObject : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if(currentHealth <= 0)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     protected abstract void OnCantMove<T>(T component)

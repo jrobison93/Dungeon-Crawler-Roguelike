@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 404346}
-  - 114: {fileID: 11422468}
+  - 114: {fileID: 11411434}
   m_Layer: 0
   m_Name: MossyLevel
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11422468
+--- !u!114 &11411434
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -59,17 +59,17 @@ MonoBehaviour:
   - {fileID: 161454, guid: 2fb6a6a5e2f6b084c9ea228057c1d996, type: 2}
   - {fileID: 153270, guid: f31f5f8dc02e8eb48b4ba649605125a4, type: 2}
   potions:
-  - {fileID: 175748, guid: 6bccf87744faa8347ae9439abc6bfe3e, type: 2}
   - {fileID: 150354, guid: 28863de35665da74f9fb464192d701df, type: 2}
-  - {fileID: 128784, guid: 2bf18e367a9a8da4da0666e540dd8b19, type: 2}
   - {fileID: 167032, guid: 6793eea525510724d89769c6e797126e, type: 2}
+  - {fileID: 128784, guid: 2bf18e367a9a8da4da0666e540dd8b19, type: 2}
   - {fileID: 160534, guid: 1d242017bbbcd6b4b89340067ebdff50, type: 2}
+  - {fileID: 175748, guid: 6bccf87744faa8347ae9439abc6bfe3e, type: 2}
   - {fileID: 191458, guid: d216db096073a6d4fae29ce6f1263225, type: 2}
   powerUps:
-  - {fileID: 147234, guid: 9a22f38e83e52f444977ef68327e5e18, type: 2}
   - {fileID: 185990, guid: c4cd8d563c7f7fe448ce8d81fe6f818d, type: 2}
-  - {fileID: 183420, guid: 5fb40757b8d1a7e4cb12b41852fcf380, type: 2}
   - {fileID: 161180, guid: 7186d7472dfe3d7419f2d2eebe955c0f, type: 2}
+  - {fileID: 183420, guid: 5fb40757b8d1a7e4cb12b41852fcf380, type: 2}
+  - {fileID: 147234, guid: 9a22f38e83e52f444977ef68327e5e18, type: 2}
   botRightCorner: {fileID: 186264, guid: 6ac9153f1d361b44e8fe859813f3025a, type: 2}
   botLeftCorner: {fileID: 108454, guid: faee10808596157478ddd462ffbe792d, type: 2}
   topRightCorner: {fileID: 104626, guid: 6c1f32f36e459bc41b910ceef06d5bd3, type: 2}
@@ -106,6 +106,22 @@ Prefab:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: obstacles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: vertWallTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: botMidWallTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: botRightCorner
       value: 
       objectReference: {fileID: 186264, guid: 6ac9153f1d361b44e8fe859813f3025a, type: 2}
@@ -125,6 +141,22 @@ Prefab:
       propertyPath: background
       value: 
       objectReference: {fileID: 101784, guid: 902e9e71f18e5b54cbda4ab47b35cede, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exit
+      value: 
+      objectReference: {fileID: 195978, guid: 6bc8be0d30519f24aab661b5011cfe12, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 127548, guid: fd23fab2baa9ff84187ff051ba655906, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 136256, guid: 7b5b8c5cd88210a488db92bad6057cff, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 116038, guid: a138f542c6385254e8dc099bf91bc68f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158330}

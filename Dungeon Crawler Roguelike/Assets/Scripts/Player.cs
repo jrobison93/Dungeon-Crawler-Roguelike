@@ -7,9 +7,10 @@ public class Player : MovingObject
     public int baseMana;
     public Slider healthSlider;
     public Slider manaSlider;
+    public float walkSpeed = 0.25f;
+    public float restartLevelDelay = 1f;
 
-    private float walkTime = 0.25f;
-    private float startTime = Time.time;
+    public float startTime = Time.time;
     private float totalMana;
     private float currentMana;
     private float attackMod = 1f;
@@ -28,12 +29,14 @@ public class Player : MovingObject
 
         totalMana = baseMana;
         currentMana = totalMana;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update ()
     {
-        if (startTime + walkTime - Mathf.Log(speedMod) <= Time.time)
+        if (startTime + walkSpeed <= Time.time)
         {
             int horizontal = (int)Input.GetAxisRaw("Horizontal");
             int vertical = (int)Input.GetAxisRaw("Vertical");
@@ -57,7 +60,8 @@ public class Player : MovingObject
     {
         if (other.tag == "Exit")
         {
-            //Invoke("Restart", restartLevelDelay);
+            GameManager.instance.levelUp = true;
+            Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
         else if (other.tag == "HealthSmall")
@@ -93,6 +97,7 @@ public class Player : MovingObject
         else if (other.tag == "AttackUp")
         {
             attackMod++;
+            ApplyAttackMod();
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "ManaUp")
@@ -110,15 +115,21 @@ public class Player : MovingObject
         else if (other.tag == "SpeedUp")
         {
             speedMod += 0.01f;
+            ApplySpeedMod();
             other.gameObject.SetActive(false);
         }
 
 
     }
 
+    private void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
     private void ApplyManaMod()
     {
-        int manaIncrease = (int)Math.Ceiling(Math.Log(manaMod, 2));
+        float manaIncrease = (float)Math.Log(manaMod, 2);
         totalMana += manaIncrease;
         currentMana += manaIncrease;
 
@@ -127,11 +138,23 @@ public class Player : MovingObject
 
     private void ApplyDefenseMod()
     {
-        int defenseIncrease = (int)Math.Ceiling(Math.Log(defenseMod, 2));
+        float defenseIncrease = (float)Math.Log(defenseMod, 2);
         totalHealth += defenseIncrease;
         currentHealth += defenseIncrease;
 
         healthSlider.value = (currentHealth / totalHealth);
+    }
+
+    private void ApplySpeedMod()
+    {
+        float speedIncrease = (float)Math.Log(speedMod, 10);
+        walkSpeed += speedIncrease;
+    }
+
+    private void ApplyAttackMod()
+    {
+        float attackIncrease = (float)Math.Log(speedMod, 10);
+        baseAttack += attackIncrease;
     }
 
     private void UseMana(int cost)
@@ -169,10 +192,23 @@ public class Player : MovingObject
         healthSlider.value = (currentHealth / totalHealth);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         healthSlider.value = (currentHealth / totalHealth);
+
+        if (currentHealth <= 0)
+        {
+            GameManager.instance.GameOver();
+        }
+    }
+
+    public void LevelUp()
+    {
+        level++;
+        healthSlider.value = (currentHealth / totalHealth);
+        manaSlider.value = (currentMana / totalMana);
+        enabled = true;
     }
 
     protected override void OnCantMove<T>(T component)

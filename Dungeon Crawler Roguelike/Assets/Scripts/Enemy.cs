@@ -18,7 +18,7 @@ public class Enemy : MovingObject
     {
         Coord playerLoc = new Coord((int)target.position.x, (int)target.position.y);
         Coord enemyLoc = new Coord((int)transform.position.x, (int)transform.position.y);
-        if (startTime + walkTime <= Time.time && enemyLoc.Distance(playerLoc) < 15)
+        if (startTime + walkTime <= Time.time && enemyLoc.Distance(playerLoc) < 15 && !(GameManager.instance.levelUp))
         {
             int horizontal = 0;
             int vertical = 0;
@@ -38,6 +38,16 @@ public class Enemy : MovingObject
             }
 
             startTime = Time.time;
+        }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        if (currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
         }
     }
 

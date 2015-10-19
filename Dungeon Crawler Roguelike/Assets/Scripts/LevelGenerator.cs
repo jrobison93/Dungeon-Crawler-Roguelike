@@ -544,8 +544,10 @@ public class LevelGenerator : MonoBehaviour
         Room mainRoom = rooms[rooms.Count - 1];
         playerLoc = mainRoom.tiles[rand.Next(0, mainRoom.tiles.Count)];
         map[playerLoc.tileX, playerLoc.tileY] = 2;
-        GameObject instance = Instantiate(player, new Vector3(playerLoc.tileX, playerLoc.tileY, 0f), Quaternion.identity) as GameObject;
-        instance.transform.SetParent(levelHolder);
+        player.transform.position = new Vector3(playerLoc.tileX, playerLoc.tileY, 0f);
+
+
+        GameObject instance;
 
         for(int i = 0; i < rooms.Count - 1; i++)
         {
@@ -604,6 +606,14 @@ public class LevelGenerator : MonoBehaviour
                 map[tilePlacement.tileX, tilePlacement.tileY] = 4;
             }
 
+        }
+    }
+
+    public void GameOver()
+    {
+        foreach (Transform child in levelHolder)
+        {
+            GameObject.Destroy(child.gameObject);
         }
     }
 }
