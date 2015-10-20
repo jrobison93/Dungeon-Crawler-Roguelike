@@ -18,6 +18,7 @@ TagManager:
   - SpeedUp
   - HealthSlider
   - ManaSlider
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -165,9 +165,14 @@ MonoBehaviour:
   level: 0
   baseHealth: 100
   baseAttack: 10
-  baseMana: 0
+  moveSpeed: .25
+  baseMana: 50
   healthSlider: {fileID: 0}
   manaSlider: {fileID: 0}
+  specialAbility: {fileID: 194976, guid: ca2deea88e534e2489ec3146e64aa603, type: 2}
+  restartLevelDelay: 1
+  specialCost: 5
+  specialBaseDamage: 10
 --- !u!114 &11462760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,7 +263,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: specialAbility
+      value: 
+      objectReference: {fileID: 194976, guid: ca2deea88e534e2489ec3146e64aa603, type: 2}
+    - target: {fileID: 0}
+      propertyPath: baseMana
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: specialBaseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: specialCost
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104824}

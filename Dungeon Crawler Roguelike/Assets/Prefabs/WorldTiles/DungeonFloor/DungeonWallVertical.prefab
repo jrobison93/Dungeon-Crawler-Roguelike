@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6114552}
   m_Layer: 8
   m_Name: DungeonWallVertical
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: ff62b21324cab2c408888b9074393274,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182616}

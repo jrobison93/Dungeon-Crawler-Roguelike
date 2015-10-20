@@ -7,10 +7,11 @@ public class Player : MovingObject
     public int baseMana;
     public Slider healthSlider;
     public Slider manaSlider;
-    public float walkSpeed = 0.25f;
+    public GameObject specialAbility;
     public float restartLevelDelay = 1f;
+    public float specialCost;
+    public float specialBaseDamage;
 
-    public float startTime = Time.time;
     private float totalMana;
     private float currentMana;
     private float attackMod = 1f;
@@ -21,11 +22,7 @@ public class Player : MovingObject
     protected override void Start()
     {
         base.Start();
-        GameObject health = GameObject.FindGameObjectWithTag("HealthSlider");
-        healthSlider = health.GetComponent<Slider>();
-
-        GameObject mana = GameObject.FindGameObjectWithTag("ManaSlider");
-        manaSlider = mana.GetComponent<Slider>();
+        SetupSliders();
 
         totalMana = baseMana;
         currentMana = totalMana;
@@ -33,13 +30,26 @@ public class Player : MovingObject
         DontDestroyOnLoad(gameObject);
     }
 
+    private void SetupSliders()
+    {
+
+        GameObject health = GameObject.FindGameObjectWithTag("HealthSlider");
+        healthSlider = health.GetComponent<Slider>();
+
+        GameObject mana = GameObject.FindGameObjectWithTag("ManaSlider");
+        manaSlider = mana.GetComponent<Slider>();
+    }
+
+
     // Update is called once per frame
     void Update ()
     {
-        if (startTime + walkSpeed <= Time.time)
+        if (startTime + moveSpeed <= Time.time)
         {
             int horizontal = (int)Input.GetAxisRaw("Horizontal");
             int vertical = (int)Input.GetAxisRaw("Vertical");
+            int specialHorizontal = (int)Input.GetAxisRaw("SpecialHorizontal");
+            int specialVertical = (int)Input.GetAxisRaw("SpecialVertical");
 
             if (horizontal != 0)
             {
@@ -50,6 +60,25 @@ public class Player : MovingObject
             {
                 AttemptMove<Enemy>(horizontal, vertical);
             }
+
+            if(specialHorizontal != 0)
+            {
+                specialVertical = 0;
+            }
+
+            if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= currentMana) 
+            {
+                Special special = (Instantiate(specialAbility, new Vector3(transform.position.x + specialHorizontal, transform.position.y + specialVertical, 0f), Quaternion.identity) as GameObject).GetComponent<Special>();
+
+                special.xDir = specialHorizontal;
+                special.yDir = specialVertical;
+                special.baseAttack = specialBaseDamage + Mathf.Log(attackMod, 10);
+                special.SetUpSprite();
+
+                UseMana(specialCost);
+
+            }
+
 
             startTime = Time.time;
         }
@@ -148,22 +177,22 @@ public class Player : MovingObject
     private void ApplySpeedMod()
     {
         float speedIncrease = (float)Math.Log(speedMod, 10);
-        walkSpeed += speedIncrease;
+        moveSpeed += speedIncrease;
     }
 
     private void ApplyAttackMod()
     {
-        float attackIncrease = (float)Math.Log(speedMod, 10);
+        float attackIncrease = (float)Math.Log(attackMod, 10);
         baseAttack += attackIncrease;
     }
 
-    private void UseMana(int cost)
+    private void UseMana(float cost)
     {
         currentMana -= cost;
         manaSlider.value = (currentMana / totalMana);
     }
 
-    private void AddMana(int amount)
+    private void AddMana(float amount)
     {
         if (currentMana + amount < totalMana)
         {
@@ -178,7 +207,7 @@ public class Player : MovingObject
 
     }
 
-    public void AddHealth(int amount)
+    public void AddHealth(float amount)
     {
         if (currentHealth + amount < totalHealth)
         {
@@ -206,6 +235,7 @@ public class Player : MovingObject
     public void LevelUp()
     {
         level++;
+        SetupSliders();
         healthSlider.value = (currentHealth / totalHealth);
         manaSlider.value = (currentMana / totalMana);
         enabled = true;

@@ -9,6 +9,7 @@ public abstract class MovingObject : MonoBehaviour
     public int level = 1;
     public int baseHealth = 100;
     public float baseAttack = 10;
+    public float moveSpeed = 0.25f;
 
 
     private BoxCollider2D boxCollider;
@@ -18,6 +19,7 @@ public abstract class MovingObject : MonoBehaviour
 
     protected float totalHealth;
     protected float currentHealth;
+    protected float startTime = Time.time;
 
     // Use this for initialization
     protected virtual void Start()

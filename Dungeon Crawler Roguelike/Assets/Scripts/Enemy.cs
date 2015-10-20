@@ -5,7 +5,6 @@ using System;
 public class Enemy : MovingObject
 {
     private float walkTime = 0.5f;
-    private float startTime = Time.time;
     private Transform target;
 
     protected override void Start()
