@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private List<Enemy> enemies;
     private LevelGenerator currentLevel;
+    private GameObject startScreen;
+    private Text text;
 
 
 	void Awake()
@@ -30,6 +33,10 @@ public class GameManager : MonoBehaviour
         enemies = new List<Enemy>();
 
         InitGame();
+        startScreen = GameObject.Find("StartScreen");
+        text = GameObject.Find("GameOverText").GetComponent<Text>();
+        startScreen.SetActive(false);
+
     }
 
     private void OnLevelWasLoaded(int index)
@@ -50,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        startScreen.SetActive(true);
+        text.text = "You died on floor " + level;
         enabled = false;
         Destroy(player);
         currentLevel.GameOver();

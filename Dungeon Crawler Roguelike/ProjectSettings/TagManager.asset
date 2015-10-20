@@ -19,6 +19,7 @@ TagManager:
   - HealthSlider
   - ManaSlider
   - Wall
+  - UI
   layers:
   - Default
   - TransparentFX

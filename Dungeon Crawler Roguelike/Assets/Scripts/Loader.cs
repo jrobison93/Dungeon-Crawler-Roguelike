@@ -10,8 +10,15 @@ public class Loader : MonoBehaviour {
     {
         if (GameManager.instance == null)
         {
-            Instantiate(gameManager);
+
+            Invoke("StartGame", 2);
         }
 
     }
+
+    private void StartGame()
+    {
+        Instantiate(gameManager);
+    }
+
 }
