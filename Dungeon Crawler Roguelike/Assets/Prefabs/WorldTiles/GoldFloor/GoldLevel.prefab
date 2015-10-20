@@ -1,0 +1,195 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &158330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 404346}
+  - 114: {fileID: 11411434}
+  m_Layer: 0
+  m_Name: GoldLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404346
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11411434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9717353bdf8023042909fa7ffa3975c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 50
+  height: 50
+  level: 0
+  fillPercent: 60
+  floorTiles:
+  - {fileID: 136256, guid: 7b0ad639e17f6c649bda93b42c69ad26, type: 2}
+  - {fileID: 122942, guid: 94e67a2eef259184898c8e4355d59aa9, type: 2}
+  - {fileID: 116038, guid: 16d25a19c976e8b468598b48ed41f995, type: 2}
+  - {fileID: 127548, guid: d11333d0717df984a87895b9ab2ce898, type: 2}
+  botMidWallTiles:
+  - {fileID: 122180, guid: e618a11965e12aa4fa2412943b4a2aa7, type: 2}
+  - {fileID: 118794, guid: ce983a3e3a5593b479654e953c71c561, type: 2}
+  vertWallTiles:
+  - {fileID: 182616, guid: 24ec869ce996a60439db1db8f07d6ed7, type: 2}
+  - {fileID: 122004, guid: a0dfdb442230bb640b639c741203bdac, type: 2}
+  obstacles:
+  - {fileID: 163272, guid: 4625a80067e3fb74a9694c97150bde20, type: 2}
+  - {fileID: 161454, guid: 48abb4a729a6bc34bbe43d2b5343f70e, type: 2}
+  - {fileID: 153270, guid: bfba0fe1b6cb6b649a3299d1d84a430a, type: 2}
+  potions:
+  - {fileID: 150354, guid: 28863de35665da74f9fb464192d701df, type: 2}
+  - {fileID: 167032, guid: 6793eea525510724d89769c6e797126e, type: 2}
+  - {fileID: 128784, guid: 2bf18e367a9a8da4da0666e540dd8b19, type: 2}
+  - {fileID: 160534, guid: 1d242017bbbcd6b4b89340067ebdff50, type: 2}
+  - {fileID: 175748, guid: 6bccf87744faa8347ae9439abc6bfe3e, type: 2}
+  - {fileID: 191458, guid: d216db096073a6d4fae29ce6f1263225, type: 2}
+  powerUps:
+  - {fileID: 185990, guid: c4cd8d563c7f7fe448ce8d81fe6f818d, type: 2}
+  - {fileID: 161180, guid: 7186d7472dfe3d7419f2d2eebe955c0f, type: 2}
+  - {fileID: 183420, guid: 5fb40757b8d1a7e4cb12b41852fcf380, type: 2}
+  - {fileID: 147234, guid: 9a22f38e83e52f444977ef68327e5e18, type: 2}
+  botRightCorner: {fileID: 186264, guid: ece2b02c7d25a79408aa0c7be6db3f47, type: 2}
+  botLeftCorner: {fileID: 108454, guid: 05124413e6705314986f365269fcf4f9, type: 2}
+  topRightCorner: {fileID: 104626, guid: d3e14cc039a5f2e42a9cdacb09057efa, type: 2}
+  topLeftCorner: {fileID: 195522, guid: 8d19c0c197906f54ab858e19499a08af, type: 2}
+  background: {fileID: 101784, guid: 378ed0bdb8706594982b9b98e1afad8b, type: 2}
+  exit: {fileID: 195978, guid: d714041c8d9296842b95185f491e2f92, type: 2}
+  enemies:
+  - {fileID: 140704, guid: 47630640707b5a44a97b2550a118a940, type: 2}
+  - {fileID: 171676, guid: 3f17f1e1c1f33734dac6f1acb850e5af, type: 2}
+  - {fileID: 183736, guid: 8ffe1043a34f9b34586ecc7602bce205, type: 2}
+  - {fileID: 196080, guid: de820493ae49a744a9a9642f329ac376, type: 2}
+  - {fileID: 128602, guid: 12b497c4d219c6149a630ee84fa2c42d, type: 2}
+  - {fileID: 146896, guid: fca789855c9195547b1d2931c383d95f, type: 2}
+  - {fileID: 102490, guid: 24e85957a222bad4f855698048587cca, type: 2}
+  - {fileID: 198906, guid: f22d07970700a234e8702045efc97c24, type: 2}
+  - {fileID: 159774, guid: 41549e8e1896ad74786af037564efd60, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: enemies.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: potions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: obstacles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: vertWallTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: botMidWallTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: botRightCorner
+      value: 
+      objectReference: {fileID: 186264, guid: ece2b02c7d25a79408aa0c7be6db3f47, type: 2}
+    - target: {fileID: 0}
+      propertyPath: botLeftCorner
+      value: 
+      objectReference: {fileID: 108454, guid: 05124413e6705314986f365269fcf4f9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: topRightCorner
+      value: 
+      objectReference: {fileID: 104626, guid: d3e14cc039a5f2e42a9cdacb09057efa, type: 2}
+    - target: {fileID: 0}
+      propertyPath: topLeftCorner
+      value: 
+      objectReference: {fileID: 195522, guid: 8d19c0c197906f54ab858e19499a08af, type: 2}
+    - target: {fileID: 0}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 101784, guid: 378ed0bdb8706594982b9b98e1afad8b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exit
+      value: 
+      objectReference: {fileID: 195978, guid: d714041c8d9296842b95185f491e2f92, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 136256, guid: 7b0ad639e17f6c649bda93b42c69ad26, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 122942, guid: 94e67a2eef259184898c8e4355d59aa9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 127548, guid: d11333d0717df984a87895b9ab2ce898, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floorTiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 116038, guid: 16d25a19c976e8b468598b48ed41f995, type: 2}
+    - target: {fileID: 0}
+      propertyPath: botMidWallTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 122180, guid: e618a11965e12aa4fa2412943b4a2aa7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: botMidWallTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 118794, guid: ce983a3e3a5593b479654e953c71c561, type: 2}
+    - target: {fileID: 0}
+      propertyPath: vertWallTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 182616, guid: 24ec869ce996a60439db1db8f07d6ed7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: vertWallTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 122004, guid: a0dfdb442230bb640b639c741203bdac, type: 2}
+    - target: {fileID: 0}
+      propertyPath: obstacles.Array.data[0]
+      value: 
+      objectReference: {fileID: 163272, guid: 4625a80067e3fb74a9694c97150bde20, type: 2}
+    - target: {fileID: 0}
+      propertyPath: obstacles.Array.data[1]
+      value: 
+      objectReference: {fileID: 161454, guid: 48abb4a729a6bc34bbe43d2b5343f70e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: obstacles.Array.data[2]
+      value: 
+      objectReference: {fileID: 153270, guid: bfba0fe1b6cb6b649a3299d1d84a430a, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 158330}
+  m_IsPrefabParent: 1

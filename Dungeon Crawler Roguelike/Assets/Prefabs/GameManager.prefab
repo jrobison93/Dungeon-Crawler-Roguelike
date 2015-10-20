@@ -41,6 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelGenerators:
   - {fileID: 11411434, guid: 777685aac39a7b94aa9d6d6850f43548, type: 2}
+  - {fileID: 11411434, guid: 9b77905c10e4c2d45b4716a24e4ec9b2, type: 2}
+  - {fileID: 11411434, guid: b512d51d5b2a2fb448e2c6ee3924b4c8, type: 2}
   playerClasses:
   - {fileID: 192020, guid: 034c4e00d2940814b92f9ada144ab0a3, type: 2}
   - {fileID: 104792, guid: 715dadf4a5172124889668e35881ce97, type: 2}
@@ -58,6 +60,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playerClasses.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: levelGenerators.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -115,6 +121,11 @@ Prefab:
       propertyPath: levelGenerators.Array.data[0]
       value: 
       objectReference: {fileID: 11411434, guid: 777685aac39a7b94aa9d6d6850f43548,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: levelGenerators.Array.data[1]
+      value: 
+      objectReference: {fileID: 11411434, guid: 9b77905c10e4c2d45b4716a24e4ec9b2,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
