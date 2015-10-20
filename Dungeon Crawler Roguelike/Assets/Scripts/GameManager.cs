@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private List<Enemy> enemies;
     private LevelGenerator currentLevel;
     private GameObject startScreen;
-    private Text text;
+    private Text gameOverText;
 
 
 	void Awake()
@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
 
         InitGame();
         startScreen = GameObject.Find("StartScreen");
-        text = GameObject.Find("GameOverText").GetComponent<Text>();
+        GameObject.Find("Title").GetComponent<Text>().enabled = false ;
+        GameObject.Find("Instructions").GetComponent<Text>().enabled = false ;
+        gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
         startScreen.SetActive(false);
 
     }
@@ -58,7 +60,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         startScreen.SetActive(true);
-        text.text = "You died on floor " + level;
+        gameOverText.text = "You died on floor " + level;
+        gameOverText.enabled = true;
         enabled = false;
         Destroy(player);
         currentLevel.GameOver();
