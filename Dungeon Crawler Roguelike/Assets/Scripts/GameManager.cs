@@ -33,11 +33,6 @@ public class GameManager : MonoBehaviour
         enemies = new List<Enemy>();
 
         InitGame();
-        startScreen = GameObject.Find("StartScreen");
-        GameObject.Find("Title").GetComponent<Text>().enabled = false ;
-        GameObject.Find("Instructions").GetComponent<Text>().enabled = false ;
-        gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
-        startScreen.SetActive(false);
 
     }
 
@@ -51,6 +46,11 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
+        startScreen = GameObject.Find("StartScreen");
+        GameObject.Find("Title").GetComponent<Text>().enabled = false;
+        GameObject.Find("Instructions").GetComponent<Text>().enabled = false;
+        gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
+        startScreen.SetActive(false);
         levelUp = false;
         enemies.Clear();
         currentLevel = levelGenerators[Random.Range(0, levelGenerators.Length)];
