@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerClasses;
     public bool levelUp;
     public static GameManager instance = null;
+    public bool[,] movingObjects;
 
     private int level = 1;
     private GameObject player;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
+        movingObjects = new bool[0, 0];
 
         InitGame();
 

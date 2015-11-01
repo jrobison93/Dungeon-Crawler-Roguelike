@@ -4,7 +4,7 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour
 {
-    public float moveTime = 0.05f;
+    public float moveTime = 0.5f;
     public LayerMask blockingLayer;
     public int level = 1;
     public int baseHealth = 100;
@@ -20,6 +20,7 @@ public abstract class MovingObject : MonoBehaviour
     protected float totalHealth;
     protected float currentHealth;
     protected float startTime = Time.time;
+    protected GameManager manager = GameManager.instance;
 
     // Use this for initialization
     protected virtual void Start()
@@ -40,9 +41,12 @@ public abstract class MovingObject : MonoBehaviour
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
-
-        if (hit.transform == null)
+        
+        if (hit.transform == null && manager.movingObjects.GetLength(0) > end.x && end.x >= 0 &&
+            manager.movingObjects.GetLength(1) > end.y && end.y >= 0 && !manager.movingObjects[(int)end.x, (int)end.y])
         {
+            manager.movingObjects[(int)end.x, (int)end.y] = true;
+            manager.movingObjects[(int)start.x, (int)start.y] = false;
             StartCoroutine(SmoothMovement(end));
             return true;
         }
@@ -70,7 +74,8 @@ public abstract class MovingObject : MonoBehaviour
         while (sqrRemainingDistance > float.Epsilon)
         {
             Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-            rb2D.MovePosition(newPosition);
+            
+            rb2D.position = newPosition;
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
             yield return null;

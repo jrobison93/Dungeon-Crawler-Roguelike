@@ -34,6 +34,7 @@ public class LevelGenerator : MonoBehaviour
     private List<Room> rooms;
     private System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
     private Coord playerLoc;
+    private GameManager manager;
 
     public void CreateLevel(int width, int height, int fillPercent, GameObject player)
     {
@@ -42,6 +43,8 @@ public class LevelGenerator : MonoBehaviour
         this.fillPercent = fillPercent;
         this.player = player;
         map = new int[width + 2, height + 2];
+        manager = GameManager.instance;
+        manager.movingObjects = new bool[width, height];
 
         InitializeList();
         CreateFloor();
@@ -544,6 +547,7 @@ public class LevelGenerator : MonoBehaviour
         Room mainRoom = rooms[rooms.Count - 1];
         playerLoc = mainRoom.tiles[rand.Next(0, mainRoom.tiles.Count)];
         map[playerLoc.tileX, playerLoc.tileY] = 2;
+        manager.movingObjects[playerLoc.tileX, playerLoc.tileY] = true;
         player.transform.position = new Vector3(playerLoc.tileX, playerLoc.tileY, 0f);
 
 
@@ -559,6 +563,7 @@ public class LevelGenerator : MonoBehaviour
                 instance = Instantiate(enemies[rand.Next(0, enemies.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
                 instance.transform.SetParent(levelHolder);
                 map[tilePlacement.tileX, tilePlacement.tileY] = 3;
+                manager.movingObjects[tilePlacement.tileX, tilePlacement.tileY] = true;
             }
 
         }

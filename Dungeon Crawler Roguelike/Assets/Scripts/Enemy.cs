@@ -47,12 +47,13 @@ public class Enemy : MovingObject
         if (currentHealth <= 0)
         {
             gameObject.SetActive(false);
+            manager.movingObjects[(int)transform.position.x, (int)transform.position.y] = false;
         }
     }
 
     protected override void OnCantMove<T>(T component)
     {
-        Player playerHit = component as Player;
+        MovingObject playerHit = component as MovingObject;
         playerHit.TakeDamage(baseAttack);
     }
 }

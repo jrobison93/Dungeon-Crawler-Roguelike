@@ -179,6 +179,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 84293689c63662e40992ee1a76ea27f0,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: .25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194976}

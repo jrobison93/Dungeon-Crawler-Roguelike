@@ -15,7 +15,7 @@ public class Special : MovingObject
     {
         if (startTime + moveSpeed <= Time.time)
         {
-            AttemptMove<Enemy>(xDir, yDir);
+            AttemptMove<MovingObject>(xDir, yDir);
         }
     }
 
@@ -23,6 +23,7 @@ public class Special : MovingObject
     {
         sprite = GetComponent<SpriteRenderer>();
         startTime = Time.time - (moveSpeed / 2);
+        manager.movingObjects[(int)transform.position.x, (int)transform.position.y] = true;
         if (xDir == 1)
         {
             sprite.sprite = sprites[0];
@@ -51,21 +52,31 @@ public class Special : MovingObject
             return;
         T hitComponent = hit.transform.GetComponent<T>();
 
-        if (!canMove && hitComponent != null)
+        if (!canMove)
         {
-            OnCantMove(hitComponent);
-        }
+            if (hitComponent != null)
+            {
+                OnCantMove(hitComponent);
+            }
 
-        if(hitComponent != null ||hit.transform.tag == "Wall")
-        {
+            manager.movingObjects[(int)transform.position.x, (int)transform.position.y] = false;
             enabled = false;
             Destroy(gameObject);
+
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        manager.movingObjects[(int)transform.position.x, (int)transform.position.y] = false;
+        enabled = false;
+        Destroy(gameObject);
+
     }
 
     protected override void OnCantMove<T>(T component)
     {
-        Enemy enemyHit = component as Enemy;
+        MovingObject enemyHit = component as MovingObject;
         enemyHit.TakeDamage(baseAttack);
     }
 }
