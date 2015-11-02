@@ -163,16 +163,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   level: 0
-  baseHealth: 100
+  baseHealth: 75
   baseAttack: 10
-  moveSpeed: .25
-  baseMana: 100
+  moveSpeed: .275000006
+  baseMana: 200
   healthSlider: {fileID: 0}
   manaSlider: {fileID: 0}
   specialAbility: {fileID: 194976, guid: 6ad5312e9755fec4c8d44ffd6281f74f, type: 2}
   restartLevelDelay: 1
-  specialCost: 10
-  specialBaseDamage: 20
+  specialCost: 5
+  specialBaseDamage: 25
 --- !u!114 &11440398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,7 +302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseHealth
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseAttack
@@ -330,15 +330,19 @@ Prefab:
       objectReference: {fileID: 194976, guid: 6ad5312e9755fec4c8d44ffd6281f74f, type: 2}
     - target: {fileID: 0}
       propertyPath: baseMana
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: specialBaseDamage
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: specialCost
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: .275000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

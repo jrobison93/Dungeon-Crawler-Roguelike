@@ -163,8 +163,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   level: 0
-  baseHealth: 100
-  baseAttack: 10
+  baseHealth: 150
+  baseAttack: 20
   moveSpeed: .25
   baseMana: 50
   healthSlider: {fileID: 0}
@@ -279,6 +279,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: specialCost
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseAttack
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseHealth
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

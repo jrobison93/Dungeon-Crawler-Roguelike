@@ -163,7 +163,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   level: 0
-  baseHealth: 200
+  baseHealth: 250
   baseAttack: 10
   moveSpeed: .25
   baseMana: 50
@@ -302,7 +302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseHealth
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseAttack

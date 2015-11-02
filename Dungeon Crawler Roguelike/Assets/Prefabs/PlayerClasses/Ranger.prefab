@@ -164,15 +164,15 @@ MonoBehaviour:
     m_Bits: 256
   level: 0
   baseHealth: 100
-  baseAttack: 10
-  moveSpeed: .25
-  baseMana: 50
+  baseAttack: 5
+  moveSpeed: .200000003
+  baseMana: 150
   healthSlider: {fileID: 0}
   manaSlider: {fileID: 0}
   specialAbility: {fileID: 194976, guid: ab1c46b84ee40d74bb609c218fbb466a, type: 2}
   restartLevelDelay: 1
   specialCost: 5
-  specialBaseDamage: 10
+  specialBaseDamage: 20
 --- !u!114 &11464632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,7 +306,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseAttack
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.r
@@ -334,11 +334,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseMana
-      value: 50
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: specialBaseDamage
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: .200000003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
