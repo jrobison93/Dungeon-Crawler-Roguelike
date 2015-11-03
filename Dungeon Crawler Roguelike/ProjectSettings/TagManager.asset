@@ -20,6 +20,8 @@ TagManager:
   - ManaSlider
   - Wall
   - UI
+  - SpeedUp
+  - SpecialUp
   layers:
   - Default
   - TransparentFX

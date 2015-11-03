@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 161180, guid: 7186d7472dfe3d7419f2d2eebe955c0f, type: 2}
   - {fileID: 183420, guid: 5fb40757b8d1a7e4cb12b41852fcf380, type: 2}
   - {fileID: 147234, guid: 9a22f38e83e52f444977ef68327e5e18, type: 2}
+  - {fileID: 147234, guid: c4515e3fe8feb3f4f8dcab651ba1dac0, type: 2}
   botRightCorner: {fileID: 186264, guid: 6a4447556d04957469398e5e5b4e6649, type: 2}
   botLeftCorner: {fileID: 108454, guid: 9c3ffd0723edc194fa0e4fd725092221, type: 2}
   topRightCorner: {fileID: 104626, guid: a5b2c87733cdcfd46ba0702d5a916ef9, type: 2}
@@ -103,7 +104,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: powerUps.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: obstacles.Array.size

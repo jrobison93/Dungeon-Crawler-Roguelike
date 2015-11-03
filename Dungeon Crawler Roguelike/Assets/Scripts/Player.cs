@@ -18,6 +18,7 @@ public class Player : MovingObject
     private float manaMod = 1f;
     private float speedMod = 1f;
     private float defenseMod = 1f;
+    private float specialMod = 1f;
 
     protected override void Start()
     {
@@ -72,7 +73,7 @@ public class Player : MovingObject
 
                 special.xDir = specialHorizontal;
                 special.yDir = specialVertical;
-                special.baseAttack = specialBaseDamage + Mathf.Log(attackMod, 10);
+                special.baseAttack = specialBaseDamage;
                 special.SetUpSprite();
 
                 UseMana(specialCost);
@@ -147,6 +148,12 @@ public class Player : MovingObject
             ApplySpeedMod();
             other.gameObject.SetActive(false);
         }
+        else if (other.tag == "SpecialUp")
+        {
+            specialMod++;
+            ApplySpecialMod();
+            other.gameObject.SetActive(false);
+        }
 
 
     }
@@ -184,6 +191,12 @@ public class Player : MovingObject
     {
         float attackIncrease = (float)Math.Log(attackMod, 10);
         baseAttack += attackIncrease;
+    }
+
+    private void ApplySpecialMod()
+    {
+        float specialIncrease = (float)Math.Log(specialMod, 10);
+        specialBaseDamage += specialIncrease;
     }
 
     private void UseMana(float cost)
