@@ -5,8 +5,6 @@ using System;
 public class Player : MovingObject
 {
     public int baseMana;
-    public Slider healthSlider;
-    public Slider manaSlider;
     public GameObject specialAbility;
     public float restartLevelDelay = 1f;
     public float specialCost;
@@ -23,22 +21,11 @@ public class Player : MovingObject
     protected override void Start()
     {
         base.Start();
-        SetupSliders();
 
         health = new PlayerHealth(baseHealth);
         mana = new PlayerMana(baseMana);
 
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void SetupSliders()
-    {
-
-        GameObject health = GameObject.FindGameObjectWithTag("HealthSlider");
-        healthSlider = health.GetComponent<Slider>();
-
-        GameObject mana = GameObject.FindGameObjectWithTag("ManaSlider");
-        manaSlider = mana.GetComponent<Slider>();
     }
 
 
@@ -166,15 +153,11 @@ public class Player : MovingObject
     private void ApplyManaMod()
     {
         mana.IncreaseTotal(manaMod);
-
-        manaSlider.value = mana.Percentage();
     }
 
     private void ApplyDefenseMod()
     {
         health.IncreaseTotal(defenseMod);
-
-        healthSlider.value = health.Percentage();
     }
 
     private void ApplySpeedMod()
@@ -198,28 +181,21 @@ public class Player : MovingObject
     private void UseMana(float cost)
     {
         mana.ReduceValue(cost);
-        manaSlider.value = mana.Percentage();
     }
 
     private void AddMana(float amount)
     {
         mana.AddValue(amount);
-
-        manaSlider.value = mana.Percentage();
-
     }
 
     public void AddHealth(float amount)
     {
         health.AddValue(amount);
-
-        healthSlider.value = health.Percentage();
     }
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        healthSlider.value = health.Percentage();
 
         if (health.IsDepleted())
         {
@@ -230,9 +206,8 @@ public class Player : MovingObject
     public void LevelUp()
     {
         level++;
-        SetupSliders();
-        healthSlider.value = health.Percentage();
-        manaSlider.value = mana.Percentage();
+        health.NotifyObservers();
+        mana.NotifyObservers();
         enabled = true;
     }
 

@@ -22,6 +22,8 @@ TagManager:
   - UI
   - SpeedUp
   - SpecialUp
+  - KillsText
+  - GUI
   layers:
   - Default
   - TransparentFX

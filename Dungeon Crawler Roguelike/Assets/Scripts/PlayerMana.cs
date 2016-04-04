@@ -1,8 +1,16 @@
 ﻿using System;
+using UnityEngine;
 
 public class PlayerMana : StatisticInterface
 {
-    public PlayerMana(float baseMana) : base(baseMana) { }
+    private int numberOfCollectedPotions = 0;
+    private int numberOfCollectedManaMods = 0;
+
+    public PlayerMana(float baseMana) : base(baseMana)
+    {
+        GameObject GUI = GameObject.FindGameObjectWithTag("GUI");
+        AddObserver(GUI.GetComponent<GUIUpdater>());
+    }
 
     public override void AddValue(float amount)
     {
@@ -14,6 +22,10 @@ public class PlayerMana : StatisticInterface
         {
             currentValue = totalValue;
         }
+
+        numberOfCollectedPotions++;
+
+        NotifyObservers();
     }
 
     public override void IncreaseTotal(float manaMod)
@@ -21,15 +33,17 @@ public class PlayerMana : StatisticInterface
         float manaIncrease = (float)Math.Log(manaMod, 2);
         totalValue += manaIncrease;
         currentValue += manaIncrease;
+        numberOfCollectedManaMods++;
+
+        NotifyObservers();
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public override void NotifyObservers()
+    {
+        object[] args = new object[] { currentValue, totalValue, numberOfCollectedPotions, numberOfCollectedManaMods };
+        foreach (Observer observer in observersList)
+        {
+            observer.UpdateObserver(this, args);
+        }
+    }
 }

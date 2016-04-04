@@ -1,6 +1,13 @@
-﻿public class EnemyHealth : StatisticInterface
+﻿using System;
+using UnityEngine;
+
+public class EnemyHealth : StatisticInterface
 {
-    public EnemyHealth(float baseHealth) : base(baseHealth) { }
+    public EnemyHealth(float baseHealth) : base(baseHealth)
+    {
+        GameObject GUI = GameObject.FindGameObjectWithTag("GUI");
+        AddObserver(GUI.GetComponent<GUIUpdater>());
+    }
 
     public override void AddValue(float amount)
     {
@@ -12,13 +19,11 @@
         return;
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public override void NotifyObservers()
+    {
+        foreach (Observer observer in observersList)
+        {
+            observer.UpdateObserver(this, null);
+        }
+    }
 }
