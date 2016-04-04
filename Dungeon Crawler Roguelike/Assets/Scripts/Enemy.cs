@@ -11,6 +11,7 @@ public class Enemy : MovingObject
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         base.Start();
+        health = new EnemyHealth(baseHealth);
     }
 
     void Update()
@@ -44,7 +45,7 @@ public class Enemy : MovingObject
     {
         base.TakeDamage(damage);
 
-        if (currentHealth <= 0)
+        if (health.IsDepleted())
         {
             gameObject.SetActive(false);
             manager.movingObjects[(int)transform.position.x, (int)transform.position.y] = false;

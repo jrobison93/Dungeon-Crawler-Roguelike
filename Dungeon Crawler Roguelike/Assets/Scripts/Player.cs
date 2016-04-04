@@ -12,21 +12,21 @@ public class Player : MovingObject
     public float specialCost;
     public float specialBaseDamage;
 
-    private float totalMana;
-    private float currentMana;
     private float attackMod = 1f;
     private float manaMod = 1f;
     private float speedMod = 1f;
     private float defenseMod = 1f;
     private float specialMod = 1f;
 
+    private StatisticInterface mana;
+
     protected override void Start()
     {
         base.Start();
         SetupSliders();
 
-        totalMana = baseMana;
-        currentMana = totalMana;
+        health = new PlayerHealth(baseHealth);
+        mana = new PlayerMana(baseMana);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -67,7 +67,7 @@ public class Player : MovingObject
                 specialVertical = 0;
             }
 
-            if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= currentMana) 
+            if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= mana.CurrentValue()) 
             {
                 Special special = (Instantiate(specialAbility, new Vector3(transform.position.x + specialHorizontal, transform.position.y + specialVertical, 0f), Quaternion.identity) as GameObject).GetComponent<Special>();
 
@@ -165,20 +165,16 @@ public class Player : MovingObject
 
     private void ApplyManaMod()
     {
-        float manaIncrease = (float)Math.Log(manaMod, 2);
-        totalMana += manaIncrease;
-        currentMana += manaIncrease;
+        mana.IncreaseTotal(manaMod);
 
-        manaSlider.value = (currentMana / totalMana);
+        manaSlider.value = mana.Percentage();
     }
 
     private void ApplyDefenseMod()
     {
-        float defenseIncrease = (float)Math.Log(defenseMod, 2);
-        totalHealth += defenseIncrease;
-        currentHealth += defenseIncrease;
+        health.IncreaseTotal(defenseMod);
 
-        healthSlider.value = (currentHealth / totalHealth);
+        healthSlider.value = health.Percentage();
     }
 
     private void ApplySpeedMod()
@@ -201,45 +197,31 @@ public class Player : MovingObject
 
     private void UseMana(float cost)
     {
-        currentMana -= cost;
-        manaSlider.value = (currentMana / totalMana);
+        mana.ReduceValue(cost);
+        manaSlider.value = mana.Percentage();
     }
 
     private void AddMana(float amount)
     {
-        if (currentMana + amount < totalMana)
-        {
-            currentMana += amount;
-        }
-        else
-        {
-            currentMana = totalMana;
-        }
+        mana.AddValue(amount);
 
-        manaSlider.value = (currentMana / totalMana);
+        manaSlider.value = mana.Percentage();
 
     }
 
     public void AddHealth(float amount)
     {
-        if (currentHealth + amount < totalHealth)
-        {
-            currentHealth += amount;
-        }
-        else
-        {
-            currentHealth = totalHealth;
-        }
+        health.AddValue(amount);
 
-        healthSlider.value = (currentHealth / totalHealth);
+        healthSlider.value = health.Percentage();
     }
 
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        healthSlider.value = (currentHealth / totalHealth);
+        healthSlider.value = health.Percentage();
 
-        if (currentHealth <= 0)
+        if (health.IsDepleted())
         {
             GameManager.instance.GameOver();
         }
@@ -249,8 +231,8 @@ public class Player : MovingObject
     {
         level++;
         SetupSliders();
-        healthSlider.value = (currentHealth / totalHealth);
-        manaSlider.value = (currentMana / totalMana);
+        healthSlider.value = health.Percentage();
+        manaSlider.value = mana.Percentage();
         enabled = true;
     }
 

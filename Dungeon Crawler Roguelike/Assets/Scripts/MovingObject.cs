@@ -15,10 +15,9 @@ public abstract class MovingObject : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
-    
 
-    protected float totalHealth;
-    protected float currentHealth;
+    protected StatisticInterface health;
+
     protected float startTime = Time.time;
     protected GameManager manager = GameManager.instance;
 
@@ -28,9 +27,6 @@ public abstract class MovingObject : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
-
-        totalHealth = baseHealth;
-        currentHealth = totalHealth;
     }
 
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -84,7 +80,7 @@ public abstract class MovingObject : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        health.ReduceValue(damage);
     }
 
     protected abstract void OnCantMove<T>(T component)
