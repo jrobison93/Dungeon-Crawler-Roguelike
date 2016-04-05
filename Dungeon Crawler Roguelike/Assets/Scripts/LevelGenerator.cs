@@ -25,7 +25,6 @@ public class LevelGenerator : MonoBehaviour
     public GameObject topLeftCorner;
     public GameObject background;
     public GameObject exit;
-    public GameObject[] enemies;
 
     private int[,] map;
     private GameObject player;
@@ -35,6 +34,7 @@ public class LevelGenerator : MonoBehaviour
     private System.Random rand = new System.Random(System.DateTime.Now.GetHashCode());
     private Coord playerLoc;
     private GameManager manager;
+    private MovingObjectFactory EnemyFactory = new EnemyFactory();
 
     public void CreateLevel(int width, int height, int fillPercent, GameObject player)
     {
@@ -560,7 +560,7 @@ public class LevelGenerator : MonoBehaviour
                 Coord tilePlacement = rooms[i].tiles[rand.Next(0, rooms[i].tiles.Count)];
                 if (map[tilePlacement.tileX, tilePlacement.tileY] > 1 || playerLoc.Distance(tilePlacement) < 10)
                     continue;
-                instance = Instantiate(enemies[rand.Next(0, enemies.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+                instance = EnemyFactory.GetRandomObject(new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity);
                 instance.transform.SetParent(levelHolder);
                 map[tilePlacement.tileX, tilePlacement.tileY] = 3;
                 manager.movingObjects[tilePlacement.tileX, tilePlacement.tileY] = true;

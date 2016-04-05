@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public LevelGenerator[] levelGenerators;
-    public GameObject[] playerClasses;
     public bool levelUp;
     public static GameManager instance = null;
     public bool[,] movingObjects;
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour
     private LevelGenerator currentLevel;
     private GameObject startScreen;
     private Text gameOverText;
+    private MovingObjectFactory playerFactory = new PlayerFactory();
 
 
 	void Awake()
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            player = Instantiate(playerClasses[Random.Range(0, playerClasses.Length)]) as GameObject;
+            player = playerFactory.GetRandomObject();
         }
         else
         {
