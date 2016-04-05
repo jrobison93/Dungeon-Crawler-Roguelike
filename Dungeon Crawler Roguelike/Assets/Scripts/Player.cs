@@ -81,34 +81,14 @@ public class Player : MovingObject
             Invoke("Restart", restartLevelDelay);
             enabled = false;
         }
-        else if (other.tag == "HealthSmall")
+        else if (other.tag == "HealthPotion")
         {
-            AddHealth(10);
+            AddHealth(other.GetComponent<Potion>().GetValue());
             other.gameObject.SetActive(false);
         }
-        else if (other.tag == "HealthMedium")
+        else if (other.tag == "ManaPotion")
         {
-            AddHealth(25);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "HealthLarge")
-        {
-            AddHealth(50);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "ManaSmall")
-        {
-            AddMana(10);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "ManaMedium")
-        {
-            AddMana(25);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "ManaLarge")
-        {
-            AddMana(50);
+            AddMana(other.GetComponent<Potion>().GetValue());
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "AttackUp")

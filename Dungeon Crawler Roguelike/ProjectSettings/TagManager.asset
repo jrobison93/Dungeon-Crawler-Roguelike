@@ -6,12 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Exit
-  - HealthLarge
-  - HealthMedium
-  - HealthSmall
-  - ManaLarge
-  - ManaMedium
-  - ManaSmall
+  - HealthPotion
+  - ManaPotion
   - AttackUp
   - ManaUp
   - DefenseUp

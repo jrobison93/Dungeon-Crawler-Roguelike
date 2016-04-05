@@ -58,13 +58,6 @@ MonoBehaviour:
   - {fileID: 163272, guid: 40b20955cefcdba4f882a53ee6abcb95, type: 2}
   - {fileID: 161454, guid: 2fb6a6a5e2f6b084c9ea228057c1d996, type: 2}
   - {fileID: 153270, guid: f31f5f8dc02e8eb48b4ba649605125a4, type: 2}
-  potions:
-  - {fileID: 150354, guid: 28863de35665da74f9fb464192d701df, type: 2}
-  - {fileID: 167032, guid: 6793eea525510724d89769c6e797126e, type: 2}
-  - {fileID: 128784, guid: 2bf18e367a9a8da4da0666e540dd8b19, type: 2}
-  - {fileID: 160534, guid: 1d242017bbbcd6b4b89340067ebdff50, type: 2}
-  - {fileID: 175748, guid: 6bccf87744faa8347ae9439abc6bfe3e, type: 2}
-  - {fileID: 191458, guid: d216db096073a6d4fae29ce6f1263225, type: 2}
   powerUps:
   - {fileID: 185990, guid: c4cd8d563c7f7fe448ce8d81fe6f818d, type: 2}
   - {fileID: 161180, guid: 7186d7472dfe3d7419f2d2eebe955c0f, type: 2}
@@ -77,16 +70,6 @@ MonoBehaviour:
   topLeftCorner: {fileID: 195522, guid: 764ce7cdd042a314e8a2fe477066dd0e, type: 2}
   background: {fileID: 101784, guid: 902e9e71f18e5b54cbda4ab47b35cede, type: 2}
   exit: {fileID: 195978, guid: 6bc8be0d30519f24aab661b5011cfe12, type: 2}
-  enemies:
-  - {fileID: 140704, guid: 47630640707b5a44a97b2550a118a940, type: 2}
-  - {fileID: 171676, guid: 3f17f1e1c1f33734dac6f1acb850e5af, type: 2}
-  - {fileID: 183736, guid: 8ffe1043a34f9b34586ecc7602bce205, type: 2}
-  - {fileID: 196080, guid: de820493ae49a744a9a9642f329ac376, type: 2}
-  - {fileID: 128602, guid: 12b497c4d219c6149a630ee84fa2c42d, type: 2}
-  - {fileID: 146896, guid: fca789855c9195547b1d2931c383d95f, type: 2}
-  - {fileID: 102490, guid: 24e85957a222bad4f855698048587cca, type: 2}
-  - {fileID: 198906, guid: f22d07970700a234e8702045efc97c24, type: 2}
-  - {fileID: 159774, guid: 41549e8e1896ad74786af037564efd60, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

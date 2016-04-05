@@ -17,7 +17,6 @@ public class LevelGenerator : MonoBehaviour
     public GameObject[] botMidWallTiles;
     public GameObject[] vertWallTiles;
     public GameObject[] obstacles;
-    public GameObject[] potions;
     public GameObject[] powerUps;
     public GameObject botRightCorner;
     public GameObject botLeftCorner;
@@ -592,7 +591,7 @@ public class LevelGenerator : MonoBehaviour
                 Coord tilePlacement = rooms[i].tiles[rand.Next(0, rooms[i].tiles.Count)];
                 if (map[tilePlacement.tileX, tilePlacement.tileY] > 1)
                     continue;
-                GameObject instance = Instantiate(potions[rand.Next(0, potions.Length)], new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity) as GameObject;
+                GameObject instance = PotionFactory.GetRandomPotion(new Vector3(tilePlacement.tileX, tilePlacement.tileY, 0f), Quaternion.identity);
                 instance.transform.SetParent(levelHolder);
                 map[tilePlacement.tileX, tilePlacement.tileY] = 4;
             }
