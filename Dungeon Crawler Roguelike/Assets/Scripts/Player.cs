@@ -9,18 +9,23 @@ public class Player : MovingObject
     public float restartLevelDelay = 1f;
     public float specialCost;
     public float specialBaseDamage;
+    public GameObject beginningSpecial;
 
     private float attackMod = 1f;
     private float manaMod = 1f;
     private float speedMod = 1f;
     private float defenseMod = 1f;
     private float specialMod = 1f;
+    private float specialIncrease = 0.0f;
+    private Special currentSpecial;
 
     private StatisticInterface mana;
 
     protected override void Start()
     {
         base.Start();
+
+        currentSpecial = specialAbility.GetComponent<Special>();
 
         health = new PlayerHealth(baseHealth);
         mana = new PlayerMana(baseMana);
@@ -56,12 +61,7 @@ public class Player : MovingObject
 
             if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= mana.CurrentValue()) 
             {
-                Special special = (Instantiate(specialAbility, new Vector3(transform.position.x + specialHorizontal, transform.position.y + specialVertical, 0f), Quaternion.identity) as GameObject).GetComponent<Special>();
-
-                special.xDir = specialHorizontal;
-                special.yDir = specialVertical;
-                special.baseAttack = specialBaseDamage;
-                special.SetUpSprite();
+                currentSpecial.Cast(transform.position, new Vector3(specialHorizontal, specialVertical, 0), specialIncrease);
 
                 UseMana(specialCost);
 
@@ -154,8 +154,7 @@ public class Player : MovingObject
 
     private void ApplySpecialMod()
     {
-        float specialIncrease = (float)Math.Log(specialMod, 10);
-        specialBaseDamage += specialIncrease;
+        specialIncrease = (float)Math.Log(specialMod, 10);
     }
 
     private void UseMana(float cost)

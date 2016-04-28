@@ -2,13 +2,39 @@
 using System.Collections;
 using System;
 
-public class Special : MovingObject
+public abstract class Special : MovingObject
 {
     public int xDir;
     public int yDir;
     public Sprite[] sprites;
+    public float modifier;
 
+    protected String specialAbilityPath;
     private SpriteRenderer sprite;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    public virtual void Cast(Vector3 origin, Vector3 direction, float specialMod)
+    {
+        Special special = InstantiateSpecial(origin, direction);
+
+        special.xDir = (int)direction.x;
+        special.yDir = (int)direction.y;
+        special.modifier = specialMod;
+        special.SetUpSprite();
+
+    }
+
+    Special InstantiateSpecial(Vector3 origin, Vector3 direction)
+    {
+        Debug.Log(specialAbilityPath + " is the path");
+        Debug.Log(this.GetType());
+        return (Instantiate(Resources.Load(specialAbilityPath), origin + direction, Quaternion.identity) as GameObject).GetComponent<Special>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -77,6 +103,6 @@ public class Special : MovingObject
     protected override void OnCantMove<T>(T component)
     {
         MovingObject enemyHit = component as MovingObject;
-        enemyHit.TakeDamage(baseAttack);
+        enemyHit.TakeDamage(baseAttack + modifier);
     }
 }

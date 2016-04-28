@@ -8,10 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 488532}
-  - 114: {fileID: 11454318}
   - 212: {fileID: 21208020}
   - 61: {fileID: 6165048}
   - 50: {fileID: 5006256}
+  - 114: {fileID: 11402100}
   m_Layer: 8
   m_Name: PoisonThing
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: .5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -38,9 +38,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194976}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -54,13 +55,14 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194976}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .257142812, y: .257142812}
---- !u!114 &11454318
+  m_Size: {x: 0.2571428, y: 0.2571428}
+--- !u!114 &11402100
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,17 +70,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 194976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 577c17632950c444f8f170682db43691, type: 3}
+  m_Script: {fileID: 11500000, guid: f79164a260beabc459da7d05ac2f1f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: .0500000007
+  moveTime: 0.25
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
   level: 1
   baseHealth: 100
   baseAttack: 10
-  moveSpeed: .25
+  moveSpeed: 0.5
   xDir: 0
   yDir: 0
   sprites:
@@ -86,6 +88,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eed9368e0c45fe5488ea00d1f37c5754, type: 3}
   - {fileID: 21300000, guid: 7e014a756fa82064dac409d7ea668e13, type: 3}
   - {fileID: 21300000, guid: 55b5efa4e11d2fe488ea7c8e5b4681a9, type: 3}
+  modifier: 0
 --- !u!212 &21208020
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -104,14 +107,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1200860067
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -119,6 +126,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
       value: 1200860067
@@ -181,7 +192,19 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: moveSpeed
-      value: .25
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: blockingLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveTime
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
