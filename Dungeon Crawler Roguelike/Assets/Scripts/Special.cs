@@ -12,7 +12,8 @@ public abstract class Special : MovingObject
     protected String specialAbilityPath;
     private SpriteRenderer sprite;
 
-    public virtual void Cast(Vector3 origin, Vector3 direction, float specialMod)
+    public abstract void Cast(Vector3 origin, Vector3 direction, float specialMod);
+    /*
     {
         Special special = InstantiateSpecial(origin, direction);
 
@@ -22,8 +23,9 @@ public abstract class Special : MovingObject
         special.SetUpSprite();
 
     }
+    */
 
-    Special InstantiateSpecial(Vector3 origin, Vector3 direction)
+    protected Special InstantiateSpecial(Vector3 origin, Vector3 direction)
     {
         Debug.Log(specialAbilityPath + " is the path");
         Debug.Log(this.GetType());
@@ -38,6 +40,10 @@ public abstract class Special : MovingObject
         {
             AttemptMove<MovingObject>(xDir, yDir);
         }
+    }
+
+    public virtual void SetBase(Special baseSpecial)
+    {
     }
 
     public void SetUpSprite()

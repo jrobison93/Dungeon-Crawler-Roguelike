@@ -1519,7 +1519,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Movement => WASD
 
-    Special Ability => Arrow Keys'
+    Special Ability => Arrow Keys
+
+    Right Shift and Ctrl => Change Special Ability (If Applicable)
+
+    Space => Super Special Ability'
 --- !u!222 &1840367438
 CanvasRenderer:
   m_ObjectHideFlags: 0

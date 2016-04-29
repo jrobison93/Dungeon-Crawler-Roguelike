@@ -18,6 +18,7 @@ public class Player : MovingObject
     private float specialIncrease = 0.0f;
     private Special currentSpecial;
     private GameIterator specialIterator;
+    private Special superSpecial;
 
     private StatisticInterface mana;
 
@@ -27,6 +28,7 @@ public class Player : MovingObject
         specialIterator = new SpecialIterator(specialAbilities);
 
         currentSpecial = specialIterator.Next();
+        superSpecial = new SuperSpecial(currentSpecial);
 
         health = new PlayerHealth(baseHealth);
         mana = new PlayerMana(baseMana);
@@ -46,6 +48,8 @@ public class Player : MovingObject
             int specialVertical = (int)Input.GetAxisRaw("SpecialVertical");
             bool nextSpecial = (int)Input.GetAxisRaw("NextSpecial") != 0;
             bool previousSpecial = (int)Input.GetAxisRaw("PrevSpecial") != 0;
+            bool superSpecialPressed = (int)Input.GetAxisRaw("SuperSpecial") != 0;
+
 
             if (horizontal != 0)
             {
@@ -57,27 +61,37 @@ public class Player : MovingObject
                 AttemptMove<Enemy>(horizontal, vertical);
             }
 
-            if(specialHorizontal != 0)
+            if(superSpecialPressed)
             {
-                specialVertical = 0;
+                superSpecial.Cast(transform.position, new Vector3(), specialIncrease);
+                UseMana(specialCost * 4);
             }
-
-            if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= mana.CurrentValue()) 
+            else
             {
-                currentSpecial.Cast(transform.position, new Vector3(specialHorizontal, specialVertical, 0), specialIncrease);
+                if (specialHorizontal != 0)
+                {
+                    specialVertical = 0;
+                }
 
-                UseMana(specialCost);
+                if ((specialHorizontal != 0 || specialVertical != 0) && specialCost <= mana.CurrentValue())
+                {
+                    currentSpecial.Cast(transform.position, new Vector3(specialHorizontal, specialVertical, 0), specialIncrease);
 
+                    UseMana(specialCost);
+
+                }
             }
-
-            //Debug.Log(nextSpecial);
+            
+            
             if(nextSpecial)
             {
                 currentSpecial = specialIterator.Next();
+                superSpecial.SetBase(currentSpecial);
             }
             else if(previousSpecial)
             {
                 currentSpecial = specialIterator.Previous();
+                superSpecial.SetBase(currentSpecial);
             }
 
 
