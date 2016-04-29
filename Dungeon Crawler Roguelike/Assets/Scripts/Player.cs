@@ -5,11 +5,10 @@ using System;
 public class Player : MovingObject
 {
     public int baseMana;
-    public GameObject specialAbility;
+    public GameObject[] specialAbilities;
     public float restartLevelDelay = 1f;
     public float specialCost;
     public float specialBaseDamage;
-    public GameObject beginningSpecial;
 
     private float attackMod = 1f;
     private float manaMod = 1f;
@@ -18,14 +17,16 @@ public class Player : MovingObject
     private float specialMod = 1f;
     private float specialIncrease = 0.0f;
     private Special currentSpecial;
+    private GameIterator specialIterator;
 
     private StatisticInterface mana;
 
     protected override void Start()
     {
         base.Start();
+        specialIterator = new SpecialIterator(specialAbilities);
 
-        currentSpecial = specialAbility.GetComponent<Special>();
+        currentSpecial = specialIterator.Next();
 
         health = new PlayerHealth(baseHealth);
         mana = new PlayerMana(baseMana);
@@ -43,6 +44,8 @@ public class Player : MovingObject
             int vertical = (int)Input.GetAxisRaw("Vertical");
             int specialHorizontal = (int)Input.GetAxisRaw("SpecialHorizontal");
             int specialVertical = (int)Input.GetAxisRaw("SpecialVertical");
+            bool nextSpecial = (int)Input.GetAxisRaw("NextSpecial") != 0;
+            bool previousSpecial = (int)Input.GetAxisRaw("PrevSpecial") != 0;
 
             if (horizontal != 0)
             {
@@ -65,6 +68,16 @@ public class Player : MovingObject
 
                 UseMana(specialCost);
 
+            }
+
+            //Debug.Log(nextSpecial);
+            if(nextSpecial)
+            {
+                currentSpecial = specialIterator.Next();
+            }
+            else if(previousSpecial)
+            {
+                currentSpecial = specialIterator.Previous();
             }
 
 

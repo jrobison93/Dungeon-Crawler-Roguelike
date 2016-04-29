@@ -62,14 +62,14 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -85,7 +85,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
 --- !u!50 &5074278
 Rigidbody2D:
@@ -94,9 +94,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168896}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -110,12 +111,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168896}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .257142812, y: .257142812}
+  m_Size: {x: 0.2571428, y: 0.2571428}
 --- !u!81 &8114972
 AudioListener:
   m_ObjectHideFlags: 1
@@ -158,18 +160,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2baa4b6586a588941ad14a6e0aa16d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: .100000001
+  moveTime: 0.1
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
   level: 0
   baseHealth: 250
   baseAttack: 10
-  moveSpeed: .25
+  moveSpeed: 0.25
   baseMana: 50
-  healthSlider: {fileID: 0}
-  manaSlider: {fileID: 0}
-  specialAbility: {fileID: 194976, guid: 5a706747b4f9f234d88e6a0e5b7fa265, type: 2}
+  specialAbilities:
+  - {fileID: 194976, guid: 5a706747b4f9f234d88e6a0e5b7fa265, type: 2}
   restartLevelDelay: 1
   specialCost: 10
   specialBaseDamage: 5
@@ -225,14 +226,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -982989297
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!222 &22206954
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -252,11 +257,11 @@ RectTransform:
   - {fileID: 491876}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -264,6 +269,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: specialAbilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
       value: 0
