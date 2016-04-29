@@ -18,7 +18,7 @@ public class Enemy : MovingObject
     {
         Coord playerLoc = new Coord((int)target.position.x, (int)target.position.y);
         Coord enemyLoc = new Coord((int)transform.position.x, (int)transform.position.y);
-        if (startTime + walkTime <= Time.time && enemyLoc.Distance(playerLoc) < 15 && !(GameManager.instance.levelUp))
+        if (!GameManager.instance.isPaused && startTime + walkTime <= Time.time && enemyLoc.Distance(playerLoc) < 15 && !(GameManager.instance.levelUp))
         {
             int horizontal = 0;
             int vertical = 0;

@@ -12,11 +12,6 @@ public abstract class Special : MovingObject
     protected String specialAbilityPath;
     private SpriteRenderer sprite;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public virtual void Cast(Vector3 origin, Vector3 direction, float specialMod)
     {
         Special special = InstantiateSpecial(origin, direction);
@@ -39,7 +34,7 @@ public abstract class Special : MovingObject
     // Update is called once per frame
     void Update()
     {
-        if (startTime + moveSpeed <= Time.time)
+        if (!GameManager.instance.isPaused && startTime + moveSpeed <= Time.time)
         {
             AttemptMove<MovingObject>(xDir, yDir);
         }

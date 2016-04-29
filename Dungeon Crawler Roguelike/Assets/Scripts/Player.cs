@@ -37,7 +37,7 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update ()
     {
-        if (startTime + moveSpeed <= Time.time)
+        if (!GameManager.instance.isPaused && startTime + moveSpeed <= Time.time)
         {
             int horizontal = (int)Input.GetAxisRaw("Horizontal");
             int vertical = (int)Input.GetAxisRaw("Vertical");
